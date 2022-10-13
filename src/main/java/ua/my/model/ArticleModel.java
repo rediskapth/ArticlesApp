@@ -1,6 +1,4 @@
-package ua.my.article;
-
-import ua.my.user.UserDao;
+package ua.my.model;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,14 +6,14 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "articles")
-public class ArticleDao {
+public class ArticleModel {
     private UUID id;
     private String title;
     private String content;
     private Date dateCreation;
-    private UserDao user;
+    private UserModel user;
 
-    public ArticleDao() {
+    public ArticleModel() {
     }
 
     @Id
@@ -57,11 +55,11 @@ public class ArticleDao {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    public UserDao getUser() {
+    public UserModel getUser() {
         return user;
     }
 
-    public void setUser(UserDao user) {
+    public void setUser(UserModel user) {
         this.user = user;
     }
 }

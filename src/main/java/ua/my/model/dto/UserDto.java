@@ -1,25 +1,22 @@
-package ua.my.user;
+package ua.my.model.dto;
 
-import ua.my.article.ArticleDao;
+import ua.my.model.UserRole;
 
-import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Set;
 import java.util.UUID;
 
-@Entity
-@Table(name = "users")
-public class UserDao {
+public class UserDto {
     private UUID id;
     private String username;
     private String password;
     private UserRole userRole;
-    private Set<ArticleDao> articles;
+    private Set<ArticleDto> articles;
 
-    public UserDao() {
+    public UserDto() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public UUID getId() {
         return id;
     }
@@ -28,7 +25,8 @@ public class UserDao {
         this.id = id;
     }
 
-    @Column(name = "username", nullable = false, unique = true)
+    @Size(min = 5, max = 50, message = "Username must be minimum 5 characters long and no longer then 50")
+    @Pattern(regexp = "[a-zA-Z0-9]*", message = "Username must contains only letters or/and digits")
     public String getUsername() {
         return username;
     }
@@ -37,7 +35,7 @@ public class UserDao {
         this.username = username;
     }
 
-    @Column(name = "password", nullable = false)
+    @Size(min = 8, max = 100, message = "Password must be minimum 8 characters long and no longer then 100")
     public String getPassword() {
         return password;
     }
@@ -46,8 +44,6 @@ public class UserDao {
         this.password = password;
     }
 
-    @Column(name = "user_role", nullable = false)
-    @Enumerated(EnumType.STRING)
     public UserRole getUserRole() {
         return userRole;
     }
@@ -56,12 +52,17 @@ public class UserDao {
         this.userRole = userRole;
     }
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    public Set<ArticleDao> getArticles() {
+    public Set<ArticleDto> getArticles() {
         return articles;
     }
 
-    public void setArticles(Set<ArticleDao> articles) {
+    public void setArticles(Set<ArticleDto> articles) {
         this.articles = articles;
+    }
+
+    @Override
+    public String toString() {
+        return id +
+                "," + username;
     }
 }

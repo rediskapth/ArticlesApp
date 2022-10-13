@@ -1,16 +1,17 @@
-package ua.my.user;
+package ua.my.security.jwt;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ua.my.model.dto.UserDto;
 
 import java.util.Collection;
 import java.util.Collections;
 
-public class UserPrincipal implements UserDetails {
+public class JwtUser implements UserDetails {
     private final UserDto user;
 
-    public UserPrincipal(UserDto user) {
+    public JwtUser(UserDto user) {
         this.user = user;
     }
 

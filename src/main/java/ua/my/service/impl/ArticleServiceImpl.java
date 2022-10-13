@@ -1,8 +1,12 @@
-package ua.my.article;
+package ua.my.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.my.error.ArticleNotFoundException;
+import ua.my.dao.ArticleRepository;
+import ua.my.exception.ArticleNotFoundException;
+import ua.my.model.dto.ArticleDto;
+import ua.my.model.mapper.ArticleConverter;
+import ua.my.service.ArticleService;
 
 import java.util.Date;
 import java.util.List;
@@ -11,12 +15,12 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class ArticleService {
+public class ArticleServiceImpl implements ArticleService {
     private final ArticleRepository articleRepository;
     private final ArticleConverter articleConverter;
 
     @Autowired
-    public ArticleService(ArticleRepository articleRepository, ArticleConverter articleConverter) {
+    public ArticleServiceImpl(ArticleRepository articleRepository, ArticleConverter articleConverter) {
         this.articleRepository = articleRepository;
         this.articleConverter = articleConverter;
     }

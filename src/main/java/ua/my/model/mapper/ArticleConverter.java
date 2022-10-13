@@ -1,12 +1,13 @@
-package ua.my.article;
+package ua.my.model.mapper;
 
 import org.springframework.stereotype.Service;
-import ua.my.user.UserConverter;
+import ua.my.model.ArticleModel;
+import ua.my.model.dto.ArticleDto;
 
 @Service
 public class ArticleConverter {
 
-    public ArticleDto convert(ArticleDao dao) {
+    public ArticleDto convert(ArticleModel dao) {
         UserConverter userConverter = new UserConverter();
         ArticleDto dto = new ArticleDto();
         dto.setId(dao.getId());
@@ -17,9 +18,9 @@ public class ArticleConverter {
         return dto;
     }
 
-    public ArticleDao convert(ArticleDto dto) {
+    public ArticleModel convert(ArticleDto dto) {
         UserConverter userConverter = new UserConverter();
-        ArticleDao dao = new ArticleDao();
+        ArticleModel dao = new ArticleModel();
         dao.setId(dto.getId());
         dao.setTitle(dto.getTitle());
         dao.setContent(dto.getContent());

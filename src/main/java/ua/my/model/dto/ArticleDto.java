@@ -1,6 +1,4 @@
-package ua.my.article;
-
-import ua.my.user.UserDto;
+package ua.my.model.dto;
 
 import javax.validation.constraints.Size;
 import java.util.Date;

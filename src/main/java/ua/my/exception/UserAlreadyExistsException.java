@@ -1,4 +1,4 @@
-package ua.my.error;
+package ua.my.exception;
 
 public class UserAlreadyExistsException extends RuntimeException {
 

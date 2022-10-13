@@ -1,11 +1,13 @@
-package ua.my.user;
+package ua.my.model.mapper;
 
 import org.springframework.stereotype.Service;
+import ua.my.model.UserModel;
+import ua.my.model.dto.UserDto;
 
 @Service
 public class UserConverter {
 
-    public UserDto convert(UserDao dao) {
+    public UserDto convert(UserModel dao) {
         UserDto dto = new UserDto();
         dto.setId(dao.getId());
         dto.setUsername(dao.getUsername());
@@ -14,8 +16,8 @@ public class UserConverter {
         return dto;
     }
 
-    public UserDao convert(UserDto dto) {
-        UserDao dao = new UserDao();
+    public UserModel convert(UserDto dto) {
+        UserModel dao = new UserModel();
         dao.setId(dto.getId());
         dao.setUsername(dto.getUsername());
         dao.setPassword(dto.getPassword());

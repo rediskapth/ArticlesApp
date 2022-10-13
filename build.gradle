@@ -19,6 +19,7 @@ ext {
     jstlVersion = '1.2'
     springSecurityVersion = '5.2.12.RELEASE'
     tomcatEmbedVersion = '9.0.34'
+    jjwtVersion = '0.9.1'
     junitVersion = '5.9.0'
 }
 
@@ -30,6 +31,7 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
     implementation group: 'org.springframework.security', name: 'spring-security-taglibs', version: "${springSecurityVersion}"
     implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: "${tomcatEmbedVersion}"
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: "${jjwtVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testImplementation group: 'org.springframework.security', name: 'spring-security-test'
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'

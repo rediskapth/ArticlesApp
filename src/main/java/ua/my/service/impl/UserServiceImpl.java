@@ -1,11 +1,13 @@
-package ua.my.user;
+package ua.my.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ua.my.error.UserAlreadyExistsException;
+import ua.my.dao.UserRepository;
+import ua.my.exception.UserAlreadyExistsException;
+import ua.my.model.dto.UserDto;
+import ua.my.model.mapper.UserConverter;
+import ua.my.service.UserService;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,12 +15,12 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class UserService {
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserConverter userConverter;
 
     @Autowired
-    public UserService(UserRepository userRepository, UserConverter userConverter) {
+    public UserServiceImpl(UserRepository userRepository, UserConverter userConverter) {
         this.userRepository = userRepository;
         this.userConverter = userConverter;
     }
@@ -54,14 +56,5 @@ public class UserService {
 
     public void delete(UserDto userDto) {
         userRepository.delete(userConverter.convert(userDto));
-    }
-
-    public UserDto getCurrentUser() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDto userDto = null;
-        if (userDetails instanceof UserDto) {
-            userDto = (UserDto) userDetails;
-        }
-        return userDto;
     }
 }
