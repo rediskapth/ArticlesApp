@@ -1,65 +1,31 @@
 package ua.my.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
 @Table(name = "articles")
+@Data
+@NoArgsConstructor
 public class ArticleModel {
-    private UUID id;
-    private String title;
-    private String content;
-    private Date dateCreation;
-    private UserModel user;
-
-    public ArticleModel() {
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
+    private UUID id;
 
     @Column(name = "title", nullable = false)
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    private String title;
 
     @Column(name = "content", nullable = false)
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
+    private String content;
 
     @Column(name = "date_creation", columnDefinition = "DATE")
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
-    }
+    private Date dateCreation;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
+    private UserModel user;
 }

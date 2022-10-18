@@ -1,65 +1,31 @@
 package ua.my.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "users")
+@Data
+@NoArgsConstructor
 public class UserModel {
-    private UUID id;
-    private String username;
-    private String password;
-    private UserRole userRole;
-    private Set<ArticleModel> articles;
-
-    public UserModel() {
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
+    private UUID id;
 
     @Column(name = "username", nullable = false, unique = true)
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    private String username;
 
     @Column(name = "password", nullable = false)
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    private String password;
 
     @Column(name = "user_role", nullable = false)
     @Enumerated(EnumType.STRING)
-    public UserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
-    }
+    private UserRole userRole;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    public Set<ArticleModel> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(Set<ArticleModel> articles) {
-        this.articles = articles;
-    }
+    private Set<ArticleModel> articles;
 }
